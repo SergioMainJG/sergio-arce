@@ -1,4 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
-@plugin 'daisyui';
+@plugin 'daisyui' {
+  themes:
+    lofi --default,
+    night --prefersdark;
+}
+
+html,
+body {
+  @apply min-h-dvh w-full overflow-x-hidden;
+}
+
+app-root {
+  @apply block w-full overflow-x-hidden;
+}

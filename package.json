@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "bun x ng",
     "start": "bun x ng serve -o",
+    "start:local-net": "bun x ng serve -o --host 0.0.0.0",
     "build": "bun x ng build",
     "watch": "bun x ng build --watch --configuration development",
     "test": "bun x ng test"
@@ -30,7 +31,8 @@
     "prettier": "^3.8.1",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "wrangler": "^4.93.0"
   },
   "packageManager": "pnpm@11.1.1",
   "engines": {
