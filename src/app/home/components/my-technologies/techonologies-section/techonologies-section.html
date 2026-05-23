@@ -1,0 +1,23 @@
+<section class="flex flex-col md:hidden">
+  <h3
+    class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
+  >
+    {{ title() | titlecase }}
+  </h3>
+  <span class="text-rotate text-7xl leading-loose">
+    <span class="justify-items-center">
+      @for (tech of technologies(); track tech.name) {
+        <span class="max-w-fit flex justify-center items-center content-center gap-1 text-4xl">
+          <img
+            [alt]="tech.alt"
+            [ngSrc]="tech.src"
+            class="object-contain"
+            loading="lazy"
+            width="80"
+            height="80"
+          />{{ tech.name | titlecase }}
+        </span>
+      }
+    </span>
+  </span>
+</section>

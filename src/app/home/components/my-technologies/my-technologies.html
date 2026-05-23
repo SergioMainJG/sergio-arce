@@ -1,0 +1,13 @@
+<article class="flex flex-col gap-10 md:overflow-x-hidden w-2/3 mx-auto">
+  <h2
+    class="text-4xl text-center font-bold bg-linear-to-r from-blue-300 to-purple-500 bg-clip-text text-transparent md:hidden"
+  >
+    Las tecnologías en las que me especializo son
+  </h2>
+
+  @for (group of technologies; track group.title) {
+    <techonologies-section [title]="group.title" [technologies]="group.techs" />
+  }
+
+  <technologies-table [technologiesGroups]="technologies" />
+</article>

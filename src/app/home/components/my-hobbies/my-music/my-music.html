@@ -1,12 +1,16 @@
-<article class="max-w-full">
-  <section class="divider divider-info divider-end my-15 max-w-full">
-    <h3 class="text-3xl">Música</h3>
+<article class="w-full">
+  <section class="divider divider-primary divider-end my-15">
+    <h3
+      class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
+    >
+      Música
+    </h3>
   </section>
 
   <ul class="list bg-base-100 rounded-box shadow-md md:hidden w-full">
     @for (band of bands; track $index) {
-      <li class="list-row">
-        <div class="text-4xl font-thin tabular-nums text-white">{{ $index }}</div>
+      <li class="list-row transition-colors duration-200 ease-linear hover:bg-zinc-300">
+        <div class="text-4xl font-thin tabular-nums text-primary">{{ $index }}</div>
         <div>
           <img class="size-10 rounded-box object-cover" [src]="band.src" [alt]="band.alt" />
         </div>
@@ -43,12 +47,12 @@
   >
     @for (band of bands; track band.title) {
       <section
-        class="card group bg-base-100 image-full w-80 shadow-2xl transition duration-200 hover:shadow-info-content"
+        class="card group bg-base-100 image-full w-80 shadow-info-content transition duration-200 hover:shadow-2xl dark:shadow-zinc-300 dark:hover:shadow-lg"
       >
         <figure>
           <img [src]="band.src" [alt]="band.alt" class="object-cover size-80" />
         </figure>
-        <section class="card-body w-fit transition-colors duration-200 group-hover:text-secondary">
+        <section class="card-body w-fit transition-colors duration-200 group-hover:text-info">
           <h2 class="card-title">{{ band.title }}</h2>
           <p>{{ band.description }}</p>
           <div class="card-actions justify-end">

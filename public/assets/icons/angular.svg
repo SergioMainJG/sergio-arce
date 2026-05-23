@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="150px" height="150px" viewBox="0 0 150 150" version="1.1">
+<defs>
+<linearGradient id="linear0" gradientUnits="userSpaceOnUse" x1="14.704" y1="46.27" x2="110.985001" y2="92.024002" gradientTransform="matrix(1.171875,0,0,-1.171875,0,152.34375)">
+<stop offset="0" style="stop-color:rgb(89.411765%,0%,20.784314%);stop-opacity:1;"/>
+<stop offset="0.24" style="stop-color:rgb(96.470588%,3.921569%,28.235294%);stop-opacity:1;"/>
+<stop offset="0.352" style="stop-color:rgb(94.901961%,2.745098%,33.333333%);stop-opacity:1;"/>
+<stop offset="0.494" style="stop-color:rgb(86.27451%,3.137255%,49.019608%);stop-opacity:1;"/>
+<stop offset="0.745" style="stop-color:rgb(59.215686%,9.019608%,90.588235%);stop-opacity:1;"/>
+<stop offset="1" style="stop-color:rgb(42.352941%,0%,96.078431%);stop-opacity:1;"/>
+</linearGradient>
+<linearGradient id="linear1" gradientUnits="userSpaceOnUse" x1="28.733" y1="117.070999" x2="91.741997" y2="45.195" gradientTransform="matrix(1.171875,0,0,-1.171875,0,152.34375)">
+<stop offset="0" style="stop-color:rgb(100%,19.215686%,85.098039%);stop-opacity:1;"/>
+<stop offset="1" style="stop-color:rgb(100%,35.686275%,88.235294%);stop-opacity:0;"/>
+</linearGradient>
+</defs>
+<g id="surface1">
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#linear0);" d="M 145.898438 24.960938 L 140.742188 105.351562 L 91.757812 0 Z M 111.914062 128.90625 L 75 150 L 38.085938 128.90625 L 45.585938 110.742188 L 104.53125 110.742188 Z M 75 39.960938 L 94.335938 87.070312 L 55.664062 87.070312 Z M 9.257812 105.351562 L 4.101562 24.960938 L 58.242188 0 Z M 9.257812 105.351562 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#linear1);" d="M 145.898438 24.960938 L 140.742188 105.351562 L 91.757812 0 Z M 111.914062 128.90625 L 75 150 L 38.085938 128.90625 L 45.585938 110.742188 L 104.53125 110.742188 Z M 75 39.960938 L 94.335938 87.070312 L 55.664062 87.070312 Z M 9.257812 105.351562 L 4.101562 24.960938 L 58.242188 0 Z M 9.257812 105.351562 "/>
+</g>
+</svg>

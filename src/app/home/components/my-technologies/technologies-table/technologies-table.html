@@ -1,0 +1,47 @@
+<table class="hidden md:table table-fixed">
+  <!-- head -->
+  <thead>
+    <tr>
+      <th class="text-center" colspan="2">
+        <h3
+          class="text-4xl text-center font-bold bg-linear-to-r from-blue-300 to-purple-500 bg-clip-text text-transparent"
+        >
+          Las tecnologías en las que me especializo son
+        </h3>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (technologieGroup of technologiesGroups(); track technologieGroup) {
+      <tr
+        class="bg-inherit transition-colors duration-250 ease-in hover:bg-zinc-300 dark:hover:bg-primary-content"
+      >
+        <td class="text-center">
+          <h3
+            class="text-2xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
+          >
+            {{ technologieGroup.title | titlecase }}
+          </h3>
+        </td>
+        <td class="text-center">
+          <span class="text-rotate text-7xl leading-loose">
+            <span class="justify-items-center">
+              @for (tech of technologieGroup.techs; track tech.name) {
+                <span class="max-w-fit flex justify-center items-center content-center gap-1">
+                  <img
+                    [alt]="tech.alt"
+                    [ngSrc]="tech.src"
+                    class="object-contain"
+                    loading="lazy"
+                    width="80"
+                    height="80"
+                  />{{ tech.name | titlecase }}
+                </span>
+              }
+            </span>
+          </span>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

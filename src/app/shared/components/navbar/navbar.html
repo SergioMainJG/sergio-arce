@@ -1,5 +1,5 @@
 <header class="sticky z-50 top-0">
-  <div class="navbar bg-base-100 shadow-2xl">
+  <div class="navbar bg-base-100 shadow-md">
     <!-- Botón -->
     <div class="navbar-start">
       <div class="dropdown">
@@ -28,7 +28,14 @@
           <li><a>Proyectos</a></li>
         </ul>
       </div>
-      <a class="btn btn-ghost text-xl">Sergio Arce</a>
+      <a
+        class="btn btn-ghost text-xl transition-colors duration-150 ease-in-out hover:bg-zinc-300 dark:hover:bg-secondary-content"
+        routerLink="/"
+        [routerLinkActive]="['text-info', 'dark:text-accent']"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <h3>Sergio Arce</h3>
+      </a>
     </div>
     <!-- Botón -->
     <!-- Navegación -->
@@ -43,7 +50,7 @@
     <div class="navbar-end">
       <label class="swap swap-rotate">
         <!-- this hidden checkbox controls the state -->
-        <input type="checkbox" class="theme-controller" value="lofi" />
+        <input type="checkbox" class="theme-controller" value="night" />
 
         <!-- sun icon -->
         <svg

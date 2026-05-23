@@ -1,7 +1,11 @@
 <article class="w-full">
   <article class="w-full flex flex-col items-center">
     <section class="divider divider-info divider-end my-15 w-full">
-      <h3 class="text-3xl">Series y Peliculas</h3>
+      <h3
+        class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
+      >
+        Películas y Series
+      </h3>
     </section>
 
     <section
@@ -12,8 +16,8 @@
           <img
             [ngSrc]="movie.src"
             [alt]="movie.alt"
-            fill
             [priority]="$index === 0"
+            fill
             class="object-cover"
           />
 
