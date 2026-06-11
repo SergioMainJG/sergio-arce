@@ -23,9 +23,30 @@
           tabindex="-1"
           class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
         >
-          <li><a>Historia</a></li>
-          <li><a>Blog</a></li>
-          <li><a>Proyectos</a></li>
+          <li>
+            <a
+              routerLink="/story"
+              [routerLinkActive]="['text-info', 'dark:text-accent']"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Historia</a
+            >
+          </li>
+          <li>
+            <a
+              routterLink="/blog"
+              [routerLinkActive]="['text-info', 'dark:text-accent']"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Blog</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/projects"
+              [routerLinkActive]="['text-info', 'dark:text-accent']"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Proyectos</a
+            >
+          </li>
         </ul>
       </div>
       <a
@@ -41,9 +62,30 @@
     <!-- Navegación -->
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
-        <li><a>Historia</a></li>
-        <li><a>Blog</a></li>
-        <li><a>Proyectos</a></li>
+        <li>
+          <a
+            routerLink="/story"
+            [routerLinkActive]="['text-info', 'dark:text-accent']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Historia</a
+          >
+        </li>
+        <li>
+          <a
+            routterLink="/blog"
+            [routerLinkActive]="['text-info', 'dark:text-accent']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Blog</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/projects"
+            [routerLinkActive]="['text-info', 'dark:text-accent']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Proyectos</a
+          >
+        </li>
       </ul>
     </div>
     <!-- Navegación -->
