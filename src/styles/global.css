@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+@plugin 'daisyui' {
+  themes:
+    lofi --default,
+    night --prefersdark;
+}
+@plugin '@tailwindcss/typography';
+
+/* `dark:` follows the active daisyUI theme instead of the OS preference */
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
+
+html,
+body {
+  @apply min-h-dvh w-full overflow-x-hidden bg-base-300;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Article typography follows the active daisyUI theme */
+.prose {
+  --tw-prose-body: color-mix(in oklab, var(--color-base-content) 85%, transparent);
+  --tw-prose-headings: var(--color-base-content);
+  --tw-prose-lead: var(--color-base-content);
+  --tw-prose-links: var(--color-base-content);
+  --tw-prose-bold: var(--color-base-content);
+  --tw-prose-counters: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  --tw-prose-bullets: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+  --tw-prose-hr: var(--color-base-300);
+  --tw-prose-quotes: var(--color-base-content);
+  --tw-prose-quote-borders: var(--color-primary);
+  --tw-prose-captions: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  --tw-prose-code: var(--color-base-content);
+  --tw-prose-th-borders: var(--color-base-300);
+  --tw-prose-td-borders: var(--color-base-200);
+}
+
+/* Shiki renders both themes; switch to the dark colors with the daisyUI dark theme */
+[data-theme='night'] .astro-code,
+[data-theme='night'] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Keep the footer at the bottom on short pages */
+body {
+  @apply flex flex-col;
+}
+
+body > main {
+  @apply flex-1;
+}

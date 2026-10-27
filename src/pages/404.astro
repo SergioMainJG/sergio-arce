@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ui } from '../i18n/ui';
+
+// Static 404 can't know the visitor's locale, so it shows both languages.
+const { es, en } = ui;
+---
+
+<Layout title={es['notFound.title']} description={es['notFound.message']} noindex>
+  <main id="main" class="hero min-h-[60dvh]">
+    <div class="hero-content flex-col text-center">
+      <h1 class="text-6xl font-bold">404</h1>
+      <section lang="es" class="flex flex-col items-center gap-3">
+        <h2 class="text-2xl font-bold">{es['notFound.heading']}</h2>
+        <p>{es['notFound.message']}</p>
+        <a href="/" class="btn btn-primary">{es['notFound.back']}</a>
+      </section>
+      <div class="divider"></div>
+      <section lang="en" class="flex flex-col items-center gap-3">
+        <h2 class="text-2xl font-bold">{en['notFound.heading']}</h2>
+        <p>{en['notFound.message']}</p>
+        <a href="/en/" class="btn btn-outline">{en['notFound.back']}</a>
+      </section>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,32 @@
+---
+import type { Post } from '../../utils/blog';
+import { formatDate, getReadingTime } from '../../utils/blog';
+import { getLang, useTranslations } from '../../i18n/utils';
+
+interface Props {
+  post: Post;
+  class?: string;
+}
+
+const { post, class: className } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const { pubDate, updatedDate, draft } = post.data;
+---
+
+<p class:list={['flex flex-wrap items-center gap-x-2 text-sm opacity-80', className]}>
+  {draft && <span class="badge badge-warning badge-sm">{t('blog.draft')}</span>}
+  <time datetime={pubDate.toISOString()}>{formatDate(pubDate, lang)}</time>
+  <span aria-hidden="true">·</span>
+  <span>{getReadingTime(post)} {t('blog.minRead')}</span>
+  {
+    updatedDate && (
+      <>
+        <span aria-hidden="true">·</span>
+        <span>
+          {t('blog.updated')} <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate, lang)}</time>
+        </span>
+      </>
+    )
+  }
+</p>

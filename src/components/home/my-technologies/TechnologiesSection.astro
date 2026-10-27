@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import type { Tech } from '~interfaces/tech';
+import { titleCase } from '../../../utils/title-case';
+
+interface Props {
+  title: string;
+  technologies: Tech[];
+}
+
+const { title, technologies } = Astro.props;
+---
+
+<section class="flex flex-col md:hidden">
+  <h3
+    class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
+  >
+    {titleCase(title)}
+  </h3>
+  <span class="text-rotate text-7xl leading-loose">
+    <span class="justify-items-center">
+      {
+        technologies.map((tech) => (
+          <span class="max-w-fit flex justify-center items-center content-center gap-1 text-4xl">
+            <Image
+              alt=""
+              src={tech.src}
+              class="object-contain"
+              loading="lazy"
+              width={80}
+              height={80}
+            />
+            {titleCase(tech.name)}
+          </span>
+        ))
+      }
+    </span>
+  </span>
+</section>

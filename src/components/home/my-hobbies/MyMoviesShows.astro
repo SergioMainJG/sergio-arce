@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import type { Movie } from '~interfaces/movie';
+import { getLang, useTranslations } from '../../../i18n/utils';
+import img28years from '../../../assets/images/28years.avif';
+import deathnote from '../../../assets/images/deathnote.avif';
+import godzilla from '../../../assets/images/godzilla.avif';
+import house from '../../../assets/images/house.avif';
+import johnwick4 from '../../../assets/images/johnwick4.avif';
+import moonknight from '../../../assets/images/moonknight.avif';
+import shawshank from '../../../assets/images/shawshank.avif';
+import thebatman from '../../../assets/images/thebatman.avif';
+import superman from '../../../assets/images/superman.avif';
+
+const t = useTranslations(getLang(Astro.currentLocale));
+
+const movies: Movie[] = [
+  { src: img28years, alt: '28 years later' },
+  { src: deathnote, alt: 'Death Note' },
+  { src: godzilla, alt: 'Godzilla Minus One' },
+  { src: house, alt: 'Dr. House' },
+  { src: johnwick4, alt: 'John Wick' },
+  { src: moonknight, alt: 'Moon Knight' },
+  { src: shawshank, alt: 'Shawshank Redemption' },
+  { src: thebatman, alt: 'The Batman' },
+  { src: superman, alt: 'Superman' },
+];
+
+const total = movies.length;
+// 1-based, wrapping around at both ends
+const prevOf = (n: number) => (n === 1 ? total : n - 1);
+const nextOf = (n: number) => (n === total ? 1 : n + 1);
+---
+
+<article class="w-full" aria-labelledby="movies-title">
+  <article class="w-full flex flex-col items-center">
+    <section class="divider divider-info divider-end my-15 w-full">
+      <h3
+        id="movies-title"
+        class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
+      >
+        {t('hobbies.movies')}
+      </h3>
+    </section>
+
+    <section
+      class="carousel w-[85%] max-w-sm md:w-full md:max-w-2xl mx-auto rounded-box shadow-2xl"
+      aria-roledescription="carousel"
+      aria-label={t('carousel.label')}
+      data-carousel
+    >
+      {
+        movies.map((movie, index) => {
+          const n = index + 1;
+          return (
+            <div
+              id={`slide-${n}`}
+              class="carousel-item relative w-full aspect-2/3 bg-base-200"
+              role="group"
+              aria-roledescription={t('carousel.slide')}
+              aria-label={`${n} ${t('carousel.of')} ${total}: ${movie.alt}`}
+            >
+              <Image
+                format="avif"
+                src={movie.src}
+                alt={movie.alt}
+                widths={[384, 672, 1008]}
+                sizes="(min-width: 768px) 672px, 85vw"
+                class="absolute inset-0 size-full object-cover"
+              />
+
+              <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                <a
+                  href={`#slide-${prevOf(n)}`}
+                  class="btn btn-circle btn-sm"
+                  aria-label={t('carousel.prev')}
+                  data-carousel-nav
+                >
+                  <span aria-hidden="true">❮</span>
+                </a>
+                <a
+                  href={`#slide-${nextOf(n)}`}
+                  class="btn btn-circle btn-sm"
+                  aria-label={t('carousel.next')}
+                  data-carousel-nav
+                >
+                  <span aria-hidden="true">❯</span>
+                </a>
+              </div>
+            </div>
+          );
+        })
+      }
+    </section>
+  </article>
+</article>
+
+<script>
+  // Scroll only the carousel instead of jumping the whole page to the slide anchor.
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-carousel-nav]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const carousel = link.closest<HTMLElement>('[data-carousel]');
+      const target = document.querySelector<HTMLElement>(link.hash);
+      if (!carousel || !target) return;
+
+      event.preventDefault();
+      carousel.scrollTo({
+        left: target.offsetLeft,
+        behavior: reduceMotion.matches ? 'auto' : 'smooth',
+      });
+    });
+  });
+</script>

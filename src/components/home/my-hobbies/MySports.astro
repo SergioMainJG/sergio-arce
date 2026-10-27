@@ -1,0 +1,49 @@
+---
+import { getImage } from 'astro:assets';
+import { getLang, useTranslations } from '../../../i18n/utils';
+import gojuzen from '../../../assets/images/gojuzen.avif';
+
+const t = useTranslations(getLang(Astro.currentLocale));
+const background = await getImage({ src: gojuzen, width: 535 });
+---
+
+<article class="w-full" aria-labelledby="sports-title">
+  <section class="divider divider-info divider-end my-15">
+    <h3
+      id="sports-title"
+      class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
+    >
+      {t('hobbies.sports')}
+    </h3>
+  </section>
+  <section
+    class="hero w-full max-w-120 min-h-120 mx-auto group shadow-xl transition-all duration-200 hover:shadow-error"
+    style={`background-image: url(${background.src})`}
+  >
+    <div class="hero-overlay"></div>
+    <div class="hero-content text-neutral-content text-center">
+      <div class="max-w-md">
+        <h4 class="mb-5 text-5xl font-bold">{t('sports.title')}</h4>
+        <p class="mb-5 font-black group-hover:text-warning">
+          {t('sports.school.before')}
+          <a
+            href="https://www.instagram.com/gojuzen_club_debox/"
+            target="_blank"
+            rel="noopener noreferrer"
+            referrerpolicy="no-referrer"
+            class="btn btn-error max-w-fit font-extrabold"
+          >
+            Gojuzen<span class="sr-only"> {t('common.newTab')}</span></a
+          >
+          {t('sports.school.after')}
+        </p>
+        <section class="divider divider-info"></section>
+        <p
+          class="mb-5 font-black transition-all duration-300 [text-shadow:_0_4px_10px_black] group-hover:text-info group-hover:[text-shadow:_0_0_15px_var(--color-success)]"
+        >
+          {t('sports.experience')}
+        </p>
+      </div>
+    </div>
+  </section>
+</article>

@@ -1,0 +1,12 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLang, useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(getLang(Astro.currentLocale));
+---
+
+<Layout title={t('story.title')} description={t('story.description')}>
+  <main id="main" class="w-full">
+    <p>story works!</p>
+  </main>
+</Layout>

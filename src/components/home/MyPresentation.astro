@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+import { getLang, useTranslations } from '../../i18n/utils';
+import yoSalem from '../../assets/images/yosalem.avif';
+import yo1 from '../../assets/images/yo1.avif';
+import yo2 from '../../assets/images/yo2.avif';
+
+const t = useTranslations(getLang(Astro.currentLocale));
+---
+
+<section aria-labelledby="presentation-title">
+  <article class="hero bg-base-300 py-25 lg:min-h-screen">
+    <section class="hero-content flex flex-col md:flex-row">
+      <article class="w-full">
+        <section class="relative w-full max-w-4xl mx-auto aspect-square md:aspect-4/3 mt-10">
+          <Image
+                format="avif"
+            src={yoSalem}
+            widths={[320, 540, 800, 1080]}
+            sizes="(min-width: 1024px) 540px, 60vw"
+            loading="eager"
+            fetchpriority="high"
+            class="absolute top-0 left-0 w-[60%] h-auto object-contain rounded-3xl shadow-primary transition-shadow duration-150 ease-in-out z-10 hover:shadow-xl dark:shadow-zinc-300 dark:hover:shadow-lg"
+            alt={t('presentation.img.salem')}
+          />
+
+          <Image
+                format="avif"
+            src={yo1}
+            widths={[160, 270, 540]}
+            sizes="(min-width: 1024px) 270px, 30vw"
+            loading="eager"
+            class="absolute top-[5%] right-0 w-[30%] aspect-square object-cover rounded-3xl shadow-primary transition-shadow duration-150 ease-in-out z-20 hover:shadow-lg dark:shadow-zinc-300 dark:hover:shadow-lg"
+            alt={t('presentation.img.me1')}
+          />
+
+          <Image
+                format="avif"
+            src={yo2}
+            widths={[200, 390, 780]}
+            sizes="(min-width: 1024px) 390px, 43vw"
+            loading="eager"
+            class="absolute bottom-[-5%] right-[5%] w-[43%] object-cover rounded-3xl shadow-primary transition-shadow duration-150 ease-in-out z-30 hover:shadow-lg dark:shadow-zinc-300 dark:hover:shadow-lg"
+            alt={t('presentation.img.me2')}
+          />
+        </section>
+      </article>
+      <article class="w-full flex flex-col items-center md:w-1/2">
+        <p class="badge badge-primary my-5 text-center md:text-left">{t('presentation.badge')}</p>
+        <p class="text-center text-3xl font-bold md:text-4xl md:text-left">{t('presentation.greeting')}</p>
+        <h1 id="presentation-title" class="text-center text-4xl font-bold text-accent md:text-5xl md:text-left">
+          {t('presentation.name')}
+        </h1>
+        <p class="py-6">
+          {t('presentation.intro')}
+          <br />
+          {t('presentation.passion')}
+        </p>
+        <ul class="list bg-base-100 rounded-box shadow-md">
+          <!-- <li class="list-row hover:bg-base-300 hover:text-success"> -->
+          <li
+            class="list-row transition-colors duration-300 ease-in-out hover:bg-zinc-300 dark:hover:bg-primary-content"
+          >
+            <div class="flex justify-items-center content-center">
+              <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="3em"
+                height="3em"
+                viewBox="0 0 24 24"
+                class="fill-primary dark:fill-blue-700"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                  stroke="#000"
+                  d="m6.75 6.75l3.75 3.75M6.75 6.75L8.5 5v-.25l-1.44-.6a12 12 0 0 1-2.88-1.706L3 1.5h-.25L1.5 2.75V3l.944 1.18A12 12 0 0 1 4.15 7.06l.6 1.44H5zM13.734 17a102 102 0 0 1 4.516 5.5h.25l4-4v-.25s-2.47-1.852-5.5-4.516m.5-2.234a5 5 0 0 0 4.584-7H21.5l-3 3h-2v-2l3-3v-.584a5 5 0 0 0-6.703 6.287L11 10c-4.5 4.5-9.5 8.25-9.5 8.25v.25l4 4h.25S9.5 17.5 14 13l1.797-1.797a5 5 0 0 0 1.703.297Z"
+                />
+              </svg>
+            </div>
+            <div class="list-col-grow">
+              <div>{t('presentation.support.title')}</div>
+              <div class="text-xs uppercase font-semibold opacity-60">Bojanini Experts</div>
+              <p class="list-col-wrap text-xs">
+                {t('presentation.support.description')}
+              </p>
+            </div>
+          </li>
+          <li
+            class="list-row transition-colors duration-300 ease-in-out hover:bg-zinc-300 dark:hover:bg-primary-content"
+          >
+            <div>
+              <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="3em"
+                height="3em"
+                viewBox="0 0 16 16"
+                class="fill-primary dark:fill-blue-700"
+              >
+                <path d="M0 0h16v16H0z" fill="none" />
+                <path
+                  fill-rule="evenodd"
+                  d="M6 1a1.75 1.75 0 0 0-1.75 1.75V4H3a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.25V2.75A1.75 1.75 0 0 0 10 1zm4.25 3V2.75A.25.25 0 0 0 10 2.5H6a.25.25 0 0 0-.25.25V4zM3 5.5h10a.5.5 0 0 1 .5.5v1h-11V6a.5.5 0 0 1 .5-.5m-.5 3V13a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8.5H9V10H7V8.5z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <div class="list-col-grow">
+              <div>{t('presentation.student.title')}</div>
+              <div class="text-xs uppercase font-semibold opacity-60">
+                C.E.C.y T. 9, Oracle-Alura Gen. 5, Jala University
+              </div>
+              <p class="list-col-wrap text-xs">
+                {t('presentation.student.description')}
+              </p>
+            </div>
+          </li>
+        </ul>
+      </article>
+    </section>
+  </article>
+</section>

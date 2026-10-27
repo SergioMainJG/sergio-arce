@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MyPresentation from '../home/MyPresentation.astro';
+import MyTechnologies from '../home/my-technologies/MyTechnologies.astro';
+import CallToAction from '../home/CallToAction.astro';
+import MyHobbies from '../home/my-hobbies/MyHobbies.astro';
+---
+
+<Layout>
+  <main id="main" class="w-full">
+    <MyPresentation />
+    <div class="divider my-10"></div>
+    <MyTechnologies />
+    <div class="divider my-10"></div>
+    <CallToAction />
+    <div class="divider my-10"></div>
+    <MyHobbies />
+  </main>
+</Layout>

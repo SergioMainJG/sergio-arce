@@ -1,0 +1,24 @@
+---
+import { getLang, useTranslations } from '../../../i18n/utils';
+
+const t = useTranslations(getLang(Astro.currentLocale));
+import MyMusic from './MyMusic.astro';
+import MyPodcasts from './MyPodcasts.astro';
+import MySports from './MySports.astro';
+import MyMoviesShows from './MyMoviesShows.astro';
+---
+
+<section class="flex justify-center" aria-labelledby="hobbies-title">
+  <div class="w-9/10 flex flex-col items-center">
+    <h2
+      id="hobbies-title"
+      class="text-4xl text-center font-bold bg-linear-to-r from-blue-300 to-purple-500 bg-clip-text text-transparent md:sr-only"
+    >
+      {t('hobbies.title')}
+    </h2>
+    <MyMusic />
+    <MyPodcasts />
+    <MySports />
+    <MyMoviesShows />
+  </div>
+</section>
