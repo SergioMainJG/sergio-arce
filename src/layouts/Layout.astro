@@ -11,20 +11,13 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
-  /** Social preview image; defaults to the profile photo. */
   image?: ImageMetadata;
   imageAlt?: string;
-  /** Marks the page as a blog article for Open Graph and JSON-LD. */
   article?: {
     publishedTime: Date;
     modifiedTime?: Date | undefined;
     tags: string[];
   };
-  /**
-   * Paths (without locale) where this page exists in each language. Defaults to the
-   * current path in every language. Languages left out get no `hreflang` and the
-   * language switcher sends them to `translationFallback` instead.
-   */
   translations?: Partial<Record<Lang, string>>;
   translationFallback?: string;
 }
@@ -59,7 +52,6 @@ const defaultUrl = defaultPath === undefined ? undefined : new URL(localizePath(
 const otherLang = locales.find((code) => code !== lang)!;
 const languageHref = localizePath(otherLang, translations[otherLang] ?? translationFallback);
 
-// Social crawlers don't support AVIF, so the preview image is generated as JPEG.
 const ogImage = await getImage({
   src: image,
   width: 1200,
@@ -155,7 +147,6 @@ const structuredData = article
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
-    <!-- Applies the saved/system theme before first paint to avoid a flash of the wrong theme -->
     <script is:inline>
       (() => {
         let theme;

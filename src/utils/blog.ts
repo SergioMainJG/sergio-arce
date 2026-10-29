@@ -11,7 +11,6 @@ export const getPostLang = (post: Post): Lang => {
 
 export const getPostSlug = (post: Post) => post.id.split('/').slice(1).join('/');
 
-// Path without locale prefix, ready for `localizePath`.
 export const getPostPath = (post: Post) => `blog/${getPostSlug(post)}`;
 
 const isPublished = (post: Post) => import.meta.env.DEV || !post.data.draft;
@@ -24,7 +23,6 @@ export const getPosts = async (lang: Lang) =>
 export const getBlogStaticPaths = async (lang: Lang) =>
   (await getPosts(lang)).map((post) => ({ params: { slug: getPostSlug(post) }, props: { post } }));
 
-// Paths of this post in every language it is published in.
 export const getPostTranslations = async (post: Post) => {
   const translations: Partial<Record<Lang, string>> = { [getPostLang(post)]: getPostPath(post) };
   const { translationKey } = post.data;

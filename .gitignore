@@ -3,15 +3,10 @@
 # Compiled output
 /dist
 .astro/
-.wrangler/
-/tmp
-/out-tsc
-/bazel-out
 
 # Node
 /node_modules
 npm-debug.log
-yarn-error.log
 
 # IDEs and editors
 .idea/
@@ -30,15 +25,6 @@ yarn-error.log
 !.vscode/extensions.json
 !.vscode/mcp.json
 .history/*
-
-# Miscellaneous
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
 
 # System files
 .DS_Store

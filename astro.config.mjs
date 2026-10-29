@@ -2,13 +2,10 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
-// AVIF encoding is slow (~5 s per large image at the default effort). In dev, images are
-// encoded on demand, so use the fastest effort there; builds keep the best compression.
 const isDev = process.argv.includes("dev");
 
-// https://astro.build/config
 export default defineConfig({
-  site: "https://sergioar.dev",
+  site: "https://sergio-arce.me",
   vite: {
     plugins: [tailwindcss()],
   },
@@ -37,5 +34,8 @@ export default defineConfig({
       themes: { light: "github-light", dark: "github-dark" },
     },
   },
-  prefetch: true,
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "hover",
+  },
 });

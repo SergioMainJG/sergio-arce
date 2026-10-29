@@ -27,7 +27,6 @@ const movies: Movie[] = [
 ];
 
 const total = movies.length;
-// 1-based, wrapping around at both ends
 const prevOf = (n: number) => (n === 1 ? total : n - 1);
 const nextOf = (n: number) => (n === total ? 1 : n + 1);
 ---
@@ -96,7 +95,6 @@ const nextOf = (n: number) => (n === total ? 1 : n + 1);
 </article>
 
 <script>
-  // Scroll only the carousel instead of jumping the whole page to the slide anchor.
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
   document.querySelectorAll<HTMLAnchorElement>('[data-carousel-nav]').forEach((link) => {
