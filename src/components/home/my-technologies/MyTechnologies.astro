@@ -1,67 +1,10 @@
 ---
-import type { Tech, TechGroup } from '~interfaces/tech';
+import { technologies } from '~data/technologies';
 import TechnologiesSection from './TechnologiesSection.astro';
 import TechnologiesTable from './TechnologiesTable.astro';
-import javaIcon from '../../../assets/icons/java.svg';
-import javascriptIcon from '../../../assets/icons/javascript.svg';
-import typescriptIcon from '../../../assets/icons/typescript.svg';
-import astroIcon from '../../../assets/icons/astro.svg';
-import angularIcon from '../../../assets/icons/angular.svg';
-import encoreIcon from '../../../assets/icons/encore.svg';
-import nestjsIcon from '../../../assets/icons/nestjs.svg';
-import solidjsIcon from '../../../assets/icons/solidjs.svg';
-import springbootIcon from '../../../assets/icons/springboot.svg';
-import mysqlIcon from '../../../assets/icons/mysql.svg';
-import mongoIcon from '../../../assets/icons/mongo.svg';
-import postgresqlIcon from '../../../assets/icons/postgresql.svg';
-import sqliteIcon from '../../../assets/icons/sqlite.svg';
-import dockerIcon from '../../../assets/icons/docker.svg';
-import n8nIcon from '../../../assets/icons/n8n.svg';
-import digitaloceanIcon from '../../../assets/icons/digitalocean.svg';
-import cloudflareIcon from '../../../assets/icons/cloudflare.svg';
-import gitlabIcon from '../../../assets/icons/gitlab.svg';
-import githubIcon from '../../../assets/icons/github.svg';
 import { getLang, useTranslations } from '../../../i18n/utils';
 
 const t = useTranslations(getLang(Astro.currentLocale));
-
-const languages: Tech[] = [
-  { src: javaIcon, alt: 'Java', name: 'java' },
-  { src: javascriptIcon, alt: 'javascript', name: 'javascript' },
-  { src: typescriptIcon, alt: 'typescript', name: 'typescript' },
-];
-
-const frameworks: Tech[] = [
-  { src: astroIcon, alt: 'Astro', name: 'astro' },
-  { src: angularIcon, alt: 'Angular', name: 'angular' },
-  { src: encoreIcon, alt: 'Encore', name: 'encore' },
-  { src: nestjsIcon, alt: 'NestJS', name: 'nestjs' },
-  { src: solidjsIcon, alt: 'SolidJS', name: 'solidjs' },
-  { src: springbootIcon, alt: 'SpringBoot', name: 'springboot' },
-];
-
-const databases: Tech[] = [
-  { src: mysqlIcon, alt: 'MySQL', name: 'mysql' },
-  { src: mongoIcon, alt: 'Mongo', name: 'mongo' },
-  { src: postgresqlIcon, alt: 'PostgreSQL', name: 'postgresql' },
-  { src: sqliteIcon, alt: 'SQLite', name: 'sqlite' },
-];
-
-const platforms: Tech[] = [
-  { src: dockerIcon, alt: 'Docker', name: 'docker' },
-  { src: n8nIcon, alt: 'n8n', name: 'n8n' },
-  { src: digitaloceanIcon, alt: 'digitalocean', name: 'digitalocean' },
-  { src: cloudflareIcon, alt: 'cloudflare', name: 'cloudflare' },
-  { src: gitlabIcon, alt: 'gitlab', name: 'gitlab' },
-  { src: githubIcon, alt: 'github', name: 'github' },
-];
-
-const technologies: TechGroup[] = [
-  { title: 'technologies.languages', techs: languages },
-  { title: 'technologies.frameworks', techs: frameworks },
-  { title: 'technologies.databases', techs: databases },
-  { title: 'technologies.platforms', techs: platforms },
-];
 ---
 
 <article class="flex flex-col gap-10 md:overflow-x-hidden w-2/3 mx-auto" aria-labelledby="technologies-title">
@@ -72,7 +15,7 @@ const technologies: TechGroup[] = [
     {t('technologies.title')}
   </h2>
 
-  {technologies.map((group) => <TechnologiesSection title={t(group.title)} technologies={group.techs} />)}
+  {technologies.map((group) => <TechnologiesSection group={group} />)}
 
-  <TechnologiesTable technologiesGroups={technologies} />
+  <TechnologiesTable groups={technologies} />
 </article>

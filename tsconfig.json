@@ -8,7 +8,9 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "~interfaces/*": ["./src/interfaces/*"]
+      "~interfaces/*": ["./src/interfaces/*"],
+      "~data/*": ["./src/data/*"],
+      "~assets/*": ["./src/assets/*"]
     }
   }
 }

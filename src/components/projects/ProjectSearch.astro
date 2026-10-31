@@ -1,0 +1,27 @@
+---
+import { getLang, useTranslations } from '../../i18n/utils';
+
+interface Props {
+  total: number;
+}
+
+const { total } = Astro.props;
+const t = useTranslations(getLang(Astro.currentLocale));
+---
+
+<label class="input input-bordered flex w-full items-center gap-2">
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-60" viewBox="0 0 24 24">
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="m21 21l-4.34-4.34M11 19a8 8 0 1 0 0-16a8 8 0 0 0 0 16"
+    />
+  </svg>
+  <input type="search" class="grow" placeholder={t('projects.search')} aria-label={t('projects.search')} data-search />
+</label>
+<p class="mt-3 text-sm opacity-70" aria-live="polite" data-results data-template={t('projects.results')} data-total={total}>
+  {t('projects.results').replace('{count}', `${total}`).replace('{total}', `${total}`)}
+</p>

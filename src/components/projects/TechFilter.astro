@@ -1,0 +1,41 @@
+---
+import type { Project } from '~interfaces/project';
+import { getLang, useTranslations } from '../../i18n/utils';
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const techCounts = new Map<string, number>();
+for (const tech of projects.flatMap((project) => project.stack)) {
+  techCounts.set(tech, (techCounts.get(tech) ?? 0) + 1);
+}
+const technologies = [...techCounts].sort(([a], [b]) => a.localeCompare(b, lang, { sensitivity: 'base' }));
+---
+
+<aside aria-labelledby="technologies-title" class="lg:sticky lg:top-24 lg:self-start">
+  <fieldset class="rounded-box bg-base-100 p-4 shadow-md">
+    <legend id="technologies-title" class="sr-only">{t('projects.technologies')}</legend>
+    <p aria-hidden="true" class="mb-3 text-lg font-bold">{t('projects.technologies')}</p>
+    <ul class="flex flex-wrap gap-x-4 gap-y-1 lg:flex-col">
+      {
+        technologies.map(([tech, count]) => (
+          <li>
+            <label class="label cursor-pointer gap-2 py-1 text-base-content">
+              <input type="checkbox" value={tech} class="checkbox checkbox-primary checkbox-sm" data-tech />
+              <span class="grow">{tech}</span>
+              <span class="badge badge-ghost badge-sm">{count}</span>
+            </label>
+          </li>
+        ))
+      }
+    </ul>
+    <button type="button" class="btn btn-ghost btn-sm mt-3 w-full" data-clear>
+      {t('projects.clear')}
+    </button>
+  </fieldset>
+</aside>

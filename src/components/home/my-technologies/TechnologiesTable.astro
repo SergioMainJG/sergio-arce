@@ -1,45 +1,28 @@
 ---
-import { Image } from 'astro:assets';
 import type { TechGroup } from '~interfaces/tech';
-import { titleCase } from '../../../utils/title-case';
+import TechRotate from './TechRotate.astro';
 import { getLang, useTranslations } from '../../../i18n/utils';
 
 interface Props {
-  technologiesGroups: TechGroup[];
+  groups: TechGroup[];
 }
 
-const { technologiesGroups } = Astro.props;
+const { groups } = Astro.props;
 const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <table class="hidden md:table table-fixed" aria-labelledby="technologies-title">
   <tbody>
     {
-      technologiesGroups.map((group) => (
+      groups.map((group) => (
         <tr class="bg-inherit transition-colors duration-250 ease-in hover:bg-zinc-300 dark:hover:bg-primary-content">
           <th scope="row" class="text-center">
-            <h3 class="text-2xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent">
-              {titleCase(t(group.title))}
+            <h3 class="text-2xl font-bold capitalize bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent">
+              {t(group.title)}
             </h3>
           </th>
           <td class="text-center">
-            <span class="text-rotate text-7xl leading-loose">
-              <span class="justify-items-center">
-                {group.techs.map((tech) => (
-                  <span class="max-w-fit flex justify-center items-center content-center gap-1">
-                    <Image
-                      alt=""
-                      src={tech.src}
-                      class="object-contain"
-                      loading="lazy"
-                      width={80}
-                      height={80}
-                    />
-                    {titleCase(tech.name)}
-                  </span>
-                ))}
-              </span>
-            </span>
+            <TechRotate techs={group.techs} />
           </td>
         </tr>
       ))

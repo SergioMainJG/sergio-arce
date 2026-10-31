@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import type { Tech } from '~interfaces/tech';
+
+interface Props {
+  techs: Tech[];
+}
+
+const { techs } = Astro.props;
+---
+
+<span class="text-rotate text-7xl leading-loose">
+  <span class="justify-items-center">
+    {
+      techs.map((tech) => (
+        <span class="max-w-fit flex justify-center items-center content-center gap-1 text-4xl md:text-7xl">
+          <Image alt="" src={tech.src} class="object-contain" loading="lazy" width={80} height={80} />
+          {tech.name}
+        </span>
+      ))
+    }
+  </span>
+</span>

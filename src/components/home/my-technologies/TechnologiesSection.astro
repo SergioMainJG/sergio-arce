@@ -1,39 +1,21 @@
 ---
-import { Image } from 'astro:assets';
-import type { Tech } from '~interfaces/tech';
-import { titleCase } from '../../../utils/title-case';
+import type { TechGroup } from '~interfaces/tech';
+import TechRotate from './TechRotate.astro';
+import { getLang, useTranslations } from '../../../i18n/utils';
 
 interface Props {
-  title: string;
-  technologies: Tech[];
+  group: TechGroup;
 }
 
-const { title, technologies } = Astro.props;
+const { group } = Astro.props;
+const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <section class="flex flex-col md:hidden">
   <h3
-    class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
+    class="text-center text-3xl font-bold capitalize bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
   >
-    {titleCase(title)}
+    {t(group.title)}
   </h3>
-  <span class="text-rotate text-7xl leading-loose">
-    <span class="justify-items-center">
-      {
-        technologies.map((tech) => (
-          <span class="max-w-fit flex justify-center items-center content-center gap-1 text-4xl">
-            <Image
-              alt=""
-              src={tech.src}
-              class="object-contain"
-              loading="lazy"
-              width={80}
-              height={80}
-            />
-            {titleCase(tech.name)}
-          </span>
-        ))
-      }
-    </span>
-  </span>
+  <TechRotate techs={group.techs} />
 </section>

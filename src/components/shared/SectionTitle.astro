@@ -1,0 +1,18 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  variant?: 'primary' | 'info';
+}
+
+const { id, title, variant = 'info' } = Astro.props;
+---
+
+<div class:list={['divider divider-end my-15 w-full', variant === 'primary' ? 'divider-primary' : 'divider-info']}>
+  <h3
+    id={id}
+    class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
+  >
+    {title}
+  </h3>
+</div>

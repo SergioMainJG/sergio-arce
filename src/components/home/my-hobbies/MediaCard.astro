@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { Media } from '~interfaces/media';
+import PlayIcon from '../../shared/PlayIcon.astro';
+import { getLang, useTranslations } from '../../../i18n/utils';
+
+interface Props {
+  item: Media;
+}
+
+const { item } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+---
+
+<article
+  class="card group bg-base-100 image-full w-80 shadow-info-content transition duration-200 hover:shadow-2xl dark:shadow-zinc-300 dark:hover:shadow-lg"
+>
+  <figure>
+    <Image
+      format="avif"
+      src={item.src}
+      alt={item.alt ?? `${t('hobbies.cover')}: ${item.title}`}
+      class="object-cover size-80 bg-base-200"
+      width={320}
+      height={320}
+      densities={[1, 2]}
+    />
+  </figure>
+  <div class="card-body w-fit transition-colors duration-200 group-hover:text-info">
+    <h4 class="card-title">{item.title}</h4>
+    <p>{item.description[lang]}</p>
+    <div class="card-actions justify-end">
+      <a href={item.link} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="btn btn-ghost">
+        <PlayIcon />
+        {t('hobbies.watch')}
+        <span class="sr-only">: {item.title} {t('common.newTab')}</span>
+      </a>
+    </div>
+  </div>
+</article>

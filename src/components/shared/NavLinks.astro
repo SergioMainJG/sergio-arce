@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { UiKey } from '../../i18n/ui';
+import { getLang, getPathWithoutLocale, localizePath, useTranslations } from '../../i18n/utils';
+
+type Props = HTMLAttributes<'ul'>;
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const path = getPathWithoutLocale(Astro.url.pathname);
+const isActive = (target: string) => path === target || path.startsWith(`${target}/`);
+
+const links: { path: string; label: UiKey }[] = [
+  { path: 'story', label: 'nav.story' },
+  { path: 'projects', label: 'nav.projects' },
+];
+---
+
+<ul {...Astro.props}>
+  {
+    links.map((link) => (
+      <li>
+        <a
+          href={localizePath(lang, link.path)}
+          aria-current={isActive(link.path) ? 'page' : undefined}
+          class:list={{ 'font-bold underline underline-offset-4 dark:text-accent': isActive(link.path) }}
+        >
+          {t(link.label)}
+        </a>
+      </li>
+    ))
+  }
+</ul>

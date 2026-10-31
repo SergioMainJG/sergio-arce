@@ -1,11 +1,12 @@
 ---
+import { bands } from '~data/music';
+import { podcasts } from '~data/podcasts';
+import MediaShowcase from './MediaShowcase.astro';
+import MySports from './MySports.astro';
+import MyMoviesShows from './MyMoviesShows.astro';
 import { getLang, useTranslations } from '../../../i18n/utils';
 
 const t = useTranslations(getLang(Astro.currentLocale));
-import MyMusic from './MyMusic.astro';
-import MyPodcasts from './MyPodcasts.astro';
-import MySports from './MySports.astro';
-import MyMoviesShows from './MyMoviesShows.astro';
 ---
 
 <section class="flex justify-center" aria-labelledby="hobbies-title">
@@ -16,8 +17,8 @@ import MyMoviesShows from './MyMoviesShows.astro';
     >
       {t('hobbies.title')}
     </h2>
-    <MyMusic />
-    <MyPodcasts />
+    <MediaShowcase id="music-title" title={t('hobbies.music')} items={bands} variant="primary" />
+    <MediaShowcase id="podcasts-title" title={t('hobbies.podcasts')} items={podcasts} />
     <MySports />
     <MyMoviesShows />
   </div>

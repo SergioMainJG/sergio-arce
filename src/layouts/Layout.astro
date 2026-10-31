@@ -3,7 +3,7 @@ import { getImage } from 'astro:assets';
 import '../styles/global.css';
 import Navbar from '../components/shared/Navbar.astro';
 import Footer from '../components/shared/Footer.astro';
-import profileImage from '../assets/images/yosalem.avif';
+import profileImage from '~assets/images/me/yosalem.avif';
 import { defaultLang, languages, ui, type Lang } from '../i18n/ui';
 import { getLang, getPathWithoutLocale, localizePath, useTranslations } from '../i18n/utils';
 
@@ -13,13 +13,6 @@ interface Props {
   noindex?: boolean;
   image?: ImageMetadata;
   imageAlt?: string;
-  article?: {
-    publishedTime: Date;
-    modifiedTime?: Date | undefined;
-    tags: string[];
-  };
-  translations?: Partial<Record<Lang, string>>;
-  translationFallback?: string;
 }
 
 const lang = getLang(Astro.currentLocale);
@@ -30,27 +23,17 @@ const {
   noindex = false,
   image = profileImage,
   imageAlt = t('presentation.img.salem'),
-  article,
-  translationFallback = '',
 } = Astro.props;
 
 const site = Astro.site ?? Astro.url;
 const path = getPathWithoutLocale(Astro.url.pathname);
 const locales = Object.keys(languages) as Lang[];
-const translations =
-  Astro.props.translations ?? Object.fromEntries(locales.map((code) => [code, path]));
 const canonical = new URL(localizePath(lang, path), site).href;
-const alternates = locales.flatMap((code) => {
-  const translatedPath = translations[code];
-  return translatedPath === undefined
-    ? []
-    : [{ code, href: new URL(localizePath(code, translatedPath), site).href }];
-});
-const defaultPath = translations[defaultLang];
-const defaultUrl = defaultPath === undefined ? undefined : new URL(localizePath(defaultLang, defaultPath), site).href;
+const alternates = locales.map((code) => ({ code, href: new URL(localizePath(code, path), site).href }));
+const defaultUrl = new URL(localizePath(defaultLang, path), site).href;
 
 const otherLang = locales.find((code) => code !== lang)!;
-const languageHref = localizePath(otherLang, translations[otherLang] ?? translationFallback);
+const languageHref = localizePath(otherLang, path);
 
 const ogImage = await getImage({
   src: image,
@@ -75,21 +58,7 @@ const person = {
   ],
 };
 
-const structuredData = article
-  ? {
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: title,
-      description,
-      image: ogImageUrl,
-      url: canonical,
-      inLanguage: lang,
-      datePublished: article.publishedTime.toISOString(),
-      dateModified: (article.modifiedTime ?? article.publishedTime).toISOString(),
-      keywords: article.tags,
-      author: person,
-    }
-  : { '@context': 'https://schema.org', ...person };
+const structuredData = { '@context': 'https://schema.org', ...person };
 ---
 
 <!doctype html>
@@ -103,15 +72,17 @@ const structuredData = article
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     {alternates.map(({ code, href }) => <link rel="alternate" hreflang={code} href={href} />)}
-    {defaultUrl && <link rel="alternate" hreflang="x-default" href={defaultUrl} />}
+    <link rel="alternate" hreflang="x-default" href={defaultUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
 
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
 
-    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Sergio Arce" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -126,18 +97,6 @@ const structuredData = article
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={imageAlt} />
-    {
-      article && (
-        <>
-          <meta property="article:published_time" content={article.publishedTime.toISOString()} />
-          {article.modifiedTime && (
-            <meta property="article:modified_time" content={article.modifiedTime.toISOString()} />
-          )}
-          <meta property="article:author" content="Sergio Elias Arce Roldán" />
-          {article.tags.map((tag) => <meta property="article:tag" content={tag} />)}
-        </>
-      )
-    }
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@SNestAstroSolid" />

@@ -1,0 +1,40 @@
+---
+import { github, projects } from '~data/projects';
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../shared/PageHeader.astro';
+import ProjectCard from '../projects/ProjectCard.astro';
+import ProjectSearch from '../projects/ProjectSearch.astro';
+import TechFilter from '../projects/TechFilter.astro';
+import { getLang, useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(getLang(Astro.currentLocale));
+---
+
+<Layout title={t('projects.title')} description={t('projects.description')}>
+  <main id="main" class="mx-auto w-full max-w-6xl px-4 py-12">
+    <PageHeader title={t('projects.heading')} intro={t('projects.intro')} />
+
+    <div class="mt-12 grid gap-8 lg:grid-cols-[15rem_1fr]" data-projects>
+      <TechFilter projects={projects} />
+
+      <section aria-label={t('projects.heading')}>
+        <ProjectSearch total={projects.length} />
+        <ul class="mt-4 grid gap-6 md:grid-cols-2">
+          {projects.map((project) => <ProjectCard project={project} />)}
+        </ul>
+        <p class="mt-8 text-center opacity-70" hidden data-empty>{t('projects.empty')}</p>
+      </section>
+    </div>
+
+    <div class="mt-12 flex justify-center">
+      <a href={`${github}?tab=repositories`} target="_blank" rel="noopener noreferrer me" class="btn btn-outline">
+        {t('projects.viewAll')}
+        <span class="sr-only">{t('common.newTab')}</span>
+      </a>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import '../../scripts/project-filter';
+</script>

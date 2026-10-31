@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import type { Media } from '~interfaces/media';
+import MediaCard from './MediaCard.astro';
+import PlayIcon from '../../shared/PlayIcon.astro';
+import SectionTitle from '../../shared/SectionTitle.astro';
+import { getLang, useTranslations } from '../../../i18n/utils';
+
+interface Props {
+  id: string;
+  title: string;
+  items: Media[];
+  variant?: 'primary' | 'info';
+}
+
+const { id, title, items, variant } = Astro.props;
+const t = useTranslations(getLang(Astro.currentLocale));
+---
+
+<article class="w-full" aria-labelledby={id}>
+  <SectionTitle id={id} title={title} variant={variant} />
+
+  <ul class="list bg-base-100 rounded-box shadow-md md:hidden w-full">
+    {
+      items.map((item, index) => (
+        <li class="list-row transition-colors duration-200 ease-linear hover:bg-zinc-300">
+          <div class="text-4xl font-thin tabular-nums text-primary" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </div>
+          <div>
+            <Image
+              format="avif"
+              class="size-10 rounded-box object-cover bg-base-200"
+              src={item.src}
+              alt=""
+              width={40}
+              height={40}
+              densities={[1, 2]}
+            />
+          </div>
+          <div class="list-col-grow">
+            <h4>{item.title}</h4>
+          </div>
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            referrerpolicy="no-referrer"
+            class="btn btn-ghost max-w-fit"
+          >
+            <PlayIcon />
+            <span class="text-red-700 dark:text-red-400">YouTube</span>
+            <span class="sr-only">: {item.title} {t('common.newTab')}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 justify-items-center items-center gap-20">
+    {items.map((item) => <MediaCard item={item} />)}
+  </div>
+</article>

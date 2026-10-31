@@ -1,21 +1,15 @@
 ---
 import { getImage } from 'astro:assets';
 import { getLang, useTranslations } from '../../../i18n/utils';
-import gojuzen from '../../../assets/images/gojuzen.avif';
+import gojuzen from '~assets/images/sports/gojuzen.avif';
+import SectionTitle from '../../shared/SectionTitle.astro';
 
 const t = useTranslations(getLang(Astro.currentLocale));
 const background = await getImage({ src: gojuzen, width: 535 });
 ---
 
 <article class="w-full" aria-labelledby="sports-title">
-  <section class="divider divider-info divider-end my-15">
-    <h3
-      id="sports-title"
-      class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
-    >
-      {t('hobbies.sports')}
-    </h3>
-  </section>
+  <SectionTitle id="sports-title" title={t('hobbies.sports')} />
   <section
     class="hero w-full max-w-120 min-h-120 mx-auto group shadow-xl transition-all duration-200 hover:shadow-error"
     style={`background-image: url(${background.src})`}

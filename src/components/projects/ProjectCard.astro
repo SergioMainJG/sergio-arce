@@ -1,0 +1,65 @@
+---
+import type { Project } from '~interfaces/project';
+import { getLang, useTranslations } from '../../i18n/utils';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const normalize = (text: string) =>
+  text
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase();
+const multiRepo = project.repos.length > 1;
+---
+
+<li
+  class="card bg-base-100 shadow-md transition-shadow duration-200 hover:shadow-xl focus-within:shadow-xl"
+  data-project
+  data-text={normalize(`${project.name} ${project.description[lang]}`)}
+  data-stack={project.stack.join('|')}
+>
+  <article class="card-body">
+    <header class="flex flex-wrap items-center gap-2">
+      <h2 class="card-title text-2xl">{project.name}</h2>
+      {project.team && <span class="badge badge-secondary badge-sm">{t('projects.team')}</span>}
+    </header>
+    <p class="opacity-85">{project.description[lang]}</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Stack">
+      {project.stack.map((tech) => <li class="badge badge-outline">{tech}</li>)}
+    </ul>
+    <div class="card-actions mt-2 justify-end">
+      {
+        project.demo && (
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm"
+            aria-label={`${t('projects.demo')} ${project.name} ${t('common.newTab')}`}
+          >
+            {t('projects.demo')}
+          </a>
+        )
+      }
+      {
+        project.repos.map((repo) => (
+          <a
+            href={repo.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline btn-sm"
+            aria-label={`${t('projects.repo')} ${project.name} ${multiRepo ? repo.label : ''} ${t('common.newTab')}`}
+          >
+            {multiRepo ? `${t('projects.repo')}: ${repo.label}` : t('projects.repo')}
+          </a>
+        ))
+      }
+    </div>
+  </article>
+</li>

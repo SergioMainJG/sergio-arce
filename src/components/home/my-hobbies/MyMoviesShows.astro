@@ -1,30 +1,10 @@
 ---
 import { Image } from 'astro:assets';
-import type { Movie } from '~interfaces/movie';
+import { movies } from '~data/movies';
+import SectionTitle from '../../shared/SectionTitle.astro';
 import { getLang, useTranslations } from '../../../i18n/utils';
-import img28years from '../../../assets/images/28years.avif';
-import deathnote from '../../../assets/images/deathnote.avif';
-import godzilla from '../../../assets/images/godzilla.avif';
-import house from '../../../assets/images/house.avif';
-import johnwick4 from '../../../assets/images/johnwick4.avif';
-import moonknight from '../../../assets/images/moonknight.avif';
-import shawshank from '../../../assets/images/shawshank.avif';
-import thebatman from '../../../assets/images/thebatman.avif';
-import superman from '../../../assets/images/superman.avif';
 
 const t = useTranslations(getLang(Astro.currentLocale));
-
-const movies: Movie[] = [
-  { src: img28years, alt: '28 years later' },
-  { src: deathnote, alt: 'Death Note' },
-  { src: godzilla, alt: 'Godzilla Minus One' },
-  { src: house, alt: 'Dr. House' },
-  { src: johnwick4, alt: 'John Wick' },
-  { src: moonknight, alt: 'Moon Knight' },
-  { src: shawshank, alt: 'Shawshank Redemption' },
-  { src: thebatman, alt: 'The Batman' },
-  { src: superman, alt: 'Superman' },
-];
 
 const total = movies.length;
 const prevOf = (n: number) => (n === 1 ? total : n - 1);
@@ -33,14 +13,7 @@ const nextOf = (n: number) => (n === total ? 1 : n + 1);
 
 <article class="w-full" aria-labelledby="movies-title">
   <article class="w-full flex flex-col items-center">
-    <section class="divider divider-info divider-end my-15 w-full">
-      <h3
-        id="movies-title"
-        class="text-center text-3xl font-bold bg-linear-to-r from-yellow-400 to-red-700 bg-clip-text text-transparent"
-      >
-        {t('hobbies.movies')}
-      </h3>
-    </section>
+    <SectionTitle id="movies-title" title={t('hobbies.movies')} />
 
     <section
       class="carousel w-[85%] max-w-sm md:w-full md:max-w-2xl mx-auto rounded-box shadow-2xl"

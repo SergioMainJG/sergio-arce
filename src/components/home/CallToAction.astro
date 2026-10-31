@@ -1,26 +1,15 @@
 ---
-import PostCard from '../blog/PostCard.astro';
-import { getPosts } from '../../utils/blog';
 import { getLang, localizePath, useTranslations } from '../../i18n/utils';
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
-const [latestPost] = await getPosts(lang);
 ---
 
 <section class="mx-auto w-full max-w-4xl px-4" aria-labelledby="cta-title">
-  <h2 id="cta-title" class="mb-8 text-center text-4xl">{t('cta.title')}</h2>
-  {
-    latestPost ? (
-      <div class="relative">
-        <PostCard post={latestPost} headingLevel={3} />
-      </div>
-    ) : (
-      <p class="text-center">{t('cta.empty')}</p>
-    )
-  }
+  <h2 id="cta-title" class="mb-4 text-center text-4xl">{t('cta.title')}</h2>
+  <p class="text-center opacity-80">{t('cta.description')}</p>
   <div class="mt-6 flex flex-col items-center gap-4">
-    <a href={localizePath(lang, 'blog')} class="btn btn-outline">
+    <a href={localizePath(lang, 'projects')} class="btn btn-primary">
       {t('cta.viewAll')}
     </a>
     <p>{t('cta.contact')}</p>
